@@ -168,7 +168,7 @@ section{padding-block:110px}
   .nstage{position:relative;left:auto;height:560px}
 }
 
-/* Therapy areas: big-type rows that open as you scroll or hover (after Jacques Cie) */
+/* Therapy areas: big-type rows that open as you scroll (after Jacques Cie) */
 .alist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
 .arow{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,260px) auto;align-items:end;gap:clamp(16px,2.4vw,32px);padding:20px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink)}
 .arow .ph{position:relative;width:clamp(64px,7vw,96px);aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--mint);transition:width .8s var(--ease),border-radius .8s var(--ease)}
@@ -181,7 +181,6 @@ section{padding-block:110px}
 .arow.on h3{transform:translateX(10px);color:var(--tik-ink)}
 .arow.on .ds{opacity:1;transform:none}
 .arow.on .go{background:var(--ink);border-color:var(--ink);color:var(--paper);transform:rotate(-45deg)}
-.alist.hov .arow:not(.on) h3{opacity:.3}
 @media (max-width:860px){
   .arow{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:8px 16px;padding:16px 0}
   .arow .ph{grid-row:span 2;align-self:start;width:64px}
@@ -215,20 +214,34 @@ section{padding-block:110px}
 .hint{position:absolute;right:4%;bottom:6%;font:400 11.5px var(--mono);color:rgba(228,243,233,.55)}
 @media (max-width:900px){.gc .wrap{grid-template-columns:1fr;padding-block:60px}.stage3d{order:-1;aspect-ratio:1.05;min-height:0}.gc{border-radius:24px}}
 
-/* Made in Kobarid */
-.made{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;align-items:start}
-.made .text{grid-column:1/6;position:sticky;top:110px}
-.made h2{font-size:clamp(2.3rem,5vw,4.2rem)}
-.made .text p{color:var(--ink-2);margin-top:22px;max-width:40ch}
-.made .text p.big{font-size:clamp(1.15rem,1.7vw,1.4rem);color:var(--ink);line-height:1.5}
-.collage{grid-column:6/13;display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.collage .photo{aspect-ratio:4/5}
-.collage .wide{grid-column:1/-1;aspect-ratio:16/9}
-.cap{position:absolute;left:14px;bottom:14px;z-index:2;font:500 11.5px var(--mono);letter-spacing:.04em;color:#fff;background:rgba(9,36,23,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:6px 10px;border-radius:999px}
-.certs{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
-.certs span{font:500 12px var(--mono);padding:8px 12px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);transition:border-color .2s,transform .2s}
-.certs span:hover{border-color:var(--tik);transform:translateY(-2px)}
-@media (max-width:900px){.made .text,.collage{grid-column:1/-1}.made .text{position:static}}
+/* Soča valley journey: pinned horizontal scroll along a river that draws itself */
+.vy{position:relative;padding:0}
+.vy-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.vy-track{position:relative;height:100%;display:flex;align-items:center;gap:7vw;padding:72px 8vw 0 max(20px,calc((100vw - var(--max))/2 + 20px));width:max-content;will-change:transform}
+.vy-river{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+.vy-river path{fill:none;stroke-linecap:round}
+#vyBed{stroke:var(--rule);stroke-width:2;stroke-dasharray:2 10}
+#vyDraw{stroke:url(#vyGrad);stroke-width:5}
+#vyDot{fill:#fff;stroke:#2EC4B6;stroke-width:3;filter:drop-shadow(0 0 10px rgba(46,196,182,.9))}
+.vy-intro{position:relative;z-index:1;width:min(440px,34vw);flex:none}
+.vy-intro h2{font-size:clamp(2.6rem,4.8vw,4.6rem)}
+.vy-intro p{color:var(--ink-2);margin-top:22px;max-width:40ch}
+.vy-intro p.big{font-size:clamp(1.1rem,1.5vw,1.3rem);color:var(--ink);line-height:1.5}
+.vy-card{position:relative;z-index:1;flex:none;margin:0;width:clamp(240px,min(27vw,44vh),420px);transition:transform .2s linear}
+.vy-card .photo{aspect-ratio:4/5;box-shadow:0 40px 70px -40px rgba(13,42,28,.55)}
+.vy-card.wide{width:clamp(300px,min(36vw,68vh),560px)}.vy-card.wide .photo{aspect-ratio:4/3}
+.vy-card:nth-of-type(odd){translate:0 -6vh}.vy-card:nth-of-type(even){translate:0 6vh}
+.vy-card figcaption{margin-top:18px;max-width:34ch}
+.vy-card figcaption b{display:block;font:400 clamp(1.5rem,2.2vw,2rem)/1.05 var(--display);letter-spacing:-.02em}
+.vy-card figcaption span{display:block;margin-top:8px;font-size:15px;color:var(--ink-2)}
+@media (max-width:900px){
+  .vy{height:auto!important}
+  .vy-pin{position:relative;height:auto;overflow:visible;padding-block:80px}
+  .vy-track{transform:none!important;width:auto;flex-direction:column;align-items:stretch;gap:48px;padding:0 20px}
+  .vy-intro,.vy-card,.vy-card.wide{width:auto}
+  .vy-card:nth-of-type(odd),.vy-card:nth-of-type(even){translate:none}
+  .vy-river{display:none}
+}
 
 /* Sustainability */
 .sun{display:grid;grid-template-columns:1.2fr 1fr;border-radius:32px;overflow:hidden;background:var(--forest);color:var(--on-forest);margin-inline:max(12px,env(safe-area-inset-left,0px))}
@@ -359,37 +372,37 @@ footer .sl em{font-style:normal;color:var(--glow)}
       <div class="sh rv"><div><h2 class="split">Made for the moments that matter.</h2></div><p>From hospital wards and care homes to self-care at home and the farm, our devices are designed to be safe, simple and comfortable.</p></div>
       <ul class="alist" id="alist">
         <li><a class="arow" href="#contact">
-          <span class="ph liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?w=600&q=75&auto=format&fit=crop" alt="A carer smiling with an elderly woman" loading="lazy"></span>
+          <span class="ph"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?w=600&q=75&auto=format&fit=crop" alt="A carer smiling with an elderly woman" loading="lazy"></span>
           <h3>Urology<sup>8</sup></h3>
           <p class="ds">Nelaton and Tiemann catheters, DO.TIK with polished eyes, connectors and urine collection bags.</p>
           <span class="go" aria-hidden="true">→</span>
         </a></li>
         <li><a class="arow" href="#greencath">
-          <span class="ph liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1748969721837-2b290323022b?w=600&q=75&auto=format&fit=crop" alt="A couple hiking in the mountains" loading="lazy"></span>
+          <span class="ph"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1748969721837-2b290323022b?w=600&q=75&auto=format&fit=crop" alt="A couple hiking in the mountains" loading="lazy"></span>
           <h3>greencath®<sup>8</sup></h3>
           <p class="ds">Coated catheters for intermittent self-catheterisation, with or without a water sachet.</p>
           <span class="go" aria-hidden="true">→</span>
         </a></li>
         <li><a class="arow" href="#contact">
-          <span class="ph liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1765896387398-1e1ae8d2eb85?w=600&q=75&auto=format&fit=crop" alt="A nurse in green scrubs talking with an elderly woman" loading="lazy"></span>
+          <span class="ph"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1765896387398-1e1ae8d2eb85?w=600&q=75&auto=format&fit=crop" alt="A nurse in green scrubs talking with an elderly woman" loading="lazy"></span>
           <h3>Respiratory therapy<sup>4</sup></h3>
           <p class="ds">Aspiration catheters, with or without vacuum control, including a curved-tip option.</p>
           <span class="go" aria-hidden="true">→</span>
         </a></li>
         <li><a class="arow" href="#contact">
-          <span class="ph liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1755189118414-14c8dacdb082?w=600&q=75&auto=format&fit=crop" alt="A medical team in a hospital corridor" loading="lazy"></span>
+          <span class="ph"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1755189118414-14c8dacdb082?w=600&q=75&auto=format&fit=crop" alt="A medical team in a hospital corridor" loading="lazy"></span>
           <h3>Gastroenterology<sup>6</sup></h3>
           <p class="ds">Feeding tubes with ENFit®, stomach, duodenal and rectal tubes, and catheter stoppers.</p>
           <span class="go" aria-hidden="true">→</span>
         </a></li>
         <li><a class="arow" href="#contact">
-          <span class="ph liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1758691462413-b07dee2933fe?w=600&q=75&auto=format&fit=crop" alt="A doctor with a stethoscope" loading="lazy"></span>
+          <span class="ph"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1758691462413-b07dee2933fe?w=600&q=75&auto=format&fit=crop" alt="A doctor with a stethoscope" loading="lazy"></span>
           <h3>Gynaecology<sup>1</sup></h3>
           <p class="ds">A follicle aspiration needle for assisted reproduction.</p>
           <span class="go" aria-hidden="true">→</span>
         </a></li>
         <li><a class="arow" href="#contact">
-          <span class="ph liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=75&auto=format&fit=crop" alt="Cows in a field at sunset" loading="lazy"></span>
+          <span class="ph"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=75&auto=format&fit=crop" alt="Cows in a field at sunset" loading="lazy"></span>
           <h3>Veterinary medicine<sup>4</sup></h3>
           <p class="ds">Blood collection systems for cattle and sheep, urethral catheters for dogs and beekeeper needles.</p>
           <span class="go" aria-hidden="true">→</span>
@@ -412,18 +425,20 @@ footer .sl em{font-style:normal;color:var(--glow)}
     </div>
   </section>
 
-  <section id="kobarid">
-    <div class="wrap made">
-      <div class="text rv">
-        <h2 class="split">Seventy years in the Soča valley.</h2>
-        <p class="big">Every TIK device is made at our plant in Kobarid, between the Julian Alps and the emerald Soča river.</p>
-        <p>We are the largest manufacturer of disposable medical devices in Slovenia and a member of the Plastiflex Group. Our goal is to be a recognised medical device manufacturer in Europe and an indispensable partner to European distributors.</p>
-        <div style="margin-top:30px"><a class="btn ghost mag" href="https://tik.si/en/home/" target="_blank" rel="noopener">Our story <span class="arr">→</span></a></div>
-      </div>
-      <div class="collage">
-        <div class="photo wide rv liquid" data-mode="1" data-pos="50 40"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1599129194878-aae4bd2b779d?w=1400&q=80&auto=format&fit=crop" alt="A footbridge over the turquoise Soča river in a forested gorge" loading="lazy" style="object-position:50% 40%"></div>
-        <div class="photo rv liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=800&q=80&auto=format&fit=crop" alt="Production workers in hairnets, masks and gloves at a clean production line" loading="lazy"></div>
-        <div class="photo rv liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1579165466949-3180a3d056d5?w=800&q=80&auto=format&fit=crop" alt="A scientist in protective gear using a pipette in a lab" loading="lazy"></div>
+  <section class="vy" id="kobarid" aria-label="Seventy years in the Soča valley">
+    <div class="vy-pin">
+      <div class="vy-track" id="vyTrack">
+        <svg class="vy-river" id="vyRiver" aria-hidden="true"><defs><linearGradient id="vyGrad" x1="0" x2="1"><stop offset="0" stop-color="#1F9254"/><stop offset=".5" stop-color="#2EC4B6"/><stop offset="1" stop-color="#7EDCA4"/></linearGradient></defs><path id="vyBed"/><path id="vyDraw"/><circle id="vyDot" r="7"/></svg>
+        <div class="vy-intro rv">
+          <h2 class="split">Seventy years in the Soča valley.</h2>
+          <p class="big">Every TIK device is made at our plant in Kobarid, between the Julian Alps and the emerald Soča river.</p>
+          <p>We are the largest manufacturer of disposable medical devices in Slovenia. Our goal is to be a recognised medical device manufacturer in Europe and an indispensable partner to European distributors.</p>
+          <div style="margin-top:30px"><a class="btn ghost mag" href="https://tik.si/en/home/" target="_blank" rel="noopener">Our story <span class="arr">→</span></a></div>
+        </div>
+        <figure class="vy-card wide"><div class="photo liquid" data-mode="1" data-pos="50 40"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1599129194878-aae4bd2b779d?w=1400&q=80&auto=format&fit=crop" alt="A footbridge over the turquoise Soča river in a forested gorge" loading="lazy" style="object-position:50% 40%"></div><figcaption><b>The Soča at our door</b><span>Our plant sits in Kobarid, where the river runs emerald through the Julian Alps.</span></figcaption></figure>
+        <figure class="vy-card"><div class="photo liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=1000&q=80&auto=format&fit=crop" alt="Production workers in hairnets, masks and gloves at a clean production line" loading="lazy"></div><figcaption><b>Made on our own lines</b><span>Catheters, tubes and collection bags are designed and produced at our Kobarid plant.</span></figcaption></figure>
+        <figure class="vy-card"><div class="photo liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1579165466949-3180a3d056d5?w=1000&q=80&auto=format&fit=crop" alt="A scientist in protective gear using a pipette in a lab" loading="lazy"></div><figcaption><b>Certified to EU MDR</b><span>Our quality management is certified under the Medical Device Regulation (EU) 2017/745.</span></figcaption></figure>
+        <figure class="vy-card wide"><div class="photo liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1755189118414-14c8dacdb082?w=1400&q=80&auto=format&fit=crop" alt="A medical team in a hospital corridor" loading="lazy"></div><figcaption><b>Part of the Plastiflex Group</b><span>A partner to hospitals, pharmacies and distributors across Europe.</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -818,7 +833,7 @@ function liquid(box){
   const mode = +(box.dataset.mode||0), str = +(box.dataset.strength||1);
   const pos = (box.dataset.pos||'50 50').split(' ').map(n => +n/100);
   const tex = gl.createTexture(); let ready = false, iw = 1, ih = 1;
-  const host = box.closest('.arow,.post') || box;
+  const host = box.closest('.post') || box;
   let hover = 0, target = 0, mx = .5, my = .5, zoom = 1.08, ztarget = 1.0, last = -1;
   host.addEventListener('pointerenter', () => { target = 1; });
   host.addEventListener('pointerleave', () => { target = 0; });
@@ -1064,7 +1079,7 @@ if (FINE && !RM) {
     });
     lab.style.transform = `translate(${P[0].x}px,${P[0].y}px) translate(-50%,-50%)`;
   });
-  const MODES = [['#stage3d,.node', 92, 'Drag'], ['.arow', 96, 'Open'], ['a,button,[role=button]', 60, ''], ['#dots', 34, ''], ['.liquid', 44, '']];
+  const MODES = [['#stage3d,.node', 92, 'Drag'], ['a,button,[role=button]', 60, ''], ['#dots', 34, ''], ['.liquid', 44, '']];
   document.addEventListener('pointerover', e => {
     const m = MODES.find(([q]) => e.target.closest(q)) || [null, 18, ''];
     tsize = m[1]; lab.textContent = m[2]; cur.classList.toggle('lb', !!m[2]);
@@ -1083,20 +1098,54 @@ if (FINE && !RM) {
   });
 } else { $('#cur').remove(); }
 
-/* ---------- Therapy areas: open the hovered row, or the one at mid-screen ---------- */
+/* ---------- Therapy areas: open the row at mid-screen ---------- */
 const alist = $('#alist'), arows = [...alist.querySelectorAll('.arow')];
-let ahov = null;
 const aset = r => arows.forEach(x => x.classList.toggle('on', x === r));
 function areasScroll(){
-  if (ahov) return;
   const mid = innerHeight * .5, hit = arows.find(r => { const b = r.getBoundingClientRect(); return b.top <= mid && b.bottom >= mid; });
   const lb = alist.getBoundingClientRect();
   if (hit) aset(hit); else if (lb.bottom < 0 || lb.top > innerHeight) aset(null);
 }
-if (FINE) {
-  arows.forEach(r => r.addEventListener('pointerenter', () => { ahov = r; alist.classList.add('hov'); aset(r); }));
-  alist.addEventListener('pointerleave', () => { ahov = null; alist.classList.remove('hov'); areasScroll(); });
+
+/* ---------- Soča valley journey: vertical scroll drives a sideways track and draws the river ---------- */
+const vy = $('#kobarid'), vyTrack = $('#vyTrack'), vyBed = $('#vyBed'), vyDraw = $('#vyDraw'), vyDot = $('#vyDot'), vyCards = $$('.vy-card');
+let vyLen = 1, vyTx = 0, vyVel = 0, vyLast = 0, vyOn = false;
+function vyLayout(){
+  vyOn = innerWidth > 900;
+  if (!vyOn) { vy.style.height = ''; vyCards.forEach(c => { c.style.transform = ''; }); return; }
+  const span = vyTrack.scrollWidth - innerWidth;
+  vy.style.height = (innerHeight + Math.max(0, span)) + 'px';
+  // river: weave from the intro through the gaps between cards, alternating high and low
+  const H = vyTrack.clientHeight, pts = [[0, H*.82]];
+  vyCards.forEach((c, i) => { const x = c.offsetLeft - innerWidth*.035; pts.push([x, i % 2 ? H*.18 : H*.86]); });
+  pts.push([vyTrack.scrollWidth, H*.5]);
+  let d = `M${pts[0][0]},${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) { const [x0,y0] = pts[i-1], [x1,y1] = pts[i], mx = (x0+x1)/2; d += ` C${mx},${y0} ${mx},${y1} ${x1},${y1}`; }
+  vyBed.setAttribute('d', d); vyDraw.setAttribute('d', d);
+  vyLen = vyDraw.getTotalLength(); vyDraw.style.strokeDasharray = vyLen;
 }
+function vyScroll(){
+  if (!vyOn) return;
+  const r = vy.getBoundingClientRect(), span = vy.offsetHeight - innerHeight;
+  const p = Math.max(0, Math.min(1, -r.top / Math.max(1, span)));
+  vyTx = p * (vyTrack.scrollWidth - innerWidth);
+  vyTrack.style.transform = `translateX(${-vyTx}px)`;
+  // draw the river to just past mid-screen, catching up so it reaches the end exactly as the journey does
+  const head = Math.min(1, (vyTx + innerWidth*(.62 + .38*p)) / vyTrack.scrollWidth);
+  vyDraw.style.strokeDashoffset = vyLen * (1 - head);
+  const q = vyDraw.getPointAtLength(vyLen * head); vyDot.setAttribute('cx', q.x); vyDot.setAttribute('cy', q.y);
+}
+// cards lean into the direction of travel
+loops.add(() => {
+  if (!vyOn || RM) return;
+  vyVel = lerp(vyVel, vyTx - vyLast, .15); vyLast = vyTx;
+  const k = Math.max(-8, Math.min(8, vyVel * .25));
+  vyCards.forEach(c => { c.style.transform = `skewX(${-k}deg) rotate(${-k*.25}deg)`; });
+});
+addEventListener('resize', () => { vyLayout(); vyScroll(); });
+addEventListener('load', () => { vyLayout(); vyScroll(); });
+document.fonts?.ready.then(() => { vyLayout(); vyScroll(); });
+vyLayout();
 
 /* ---------- Scroll: header, progress, parallax, reveals, counters ---------- */
 const prog = $('#prog'), gcimg = $('#gcimg');
@@ -1111,6 +1160,7 @@ function onScroll(){
   hdr.classList.toggle('scrolled', scrollY > 8);
   story._prog?.();
   areasScroll();
+  vyScroll();
   prog.style.setProperty('--p', scrollY / Math.max(1, h.scrollHeight - innerHeight));
   $$('.rv.wait').forEach(el => { if (el.getBoundingClientRect().top < innerHeight * .9) reveal(el); });
   if (RM) return;
