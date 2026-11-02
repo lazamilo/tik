@@ -266,15 +266,27 @@ section{padding-block:110px}
 @media (max-width:860px){.news{grid-template-columns:1fr}.post{display:grid;grid-template-columns:140px 1fr;gap:6px 16px;align-items:start}.post .photo{grid-row:span 3;aspect-ratio:1}}
 @media (max-width:420px){.post{grid-template-columns:100px 1fr}}
 
-/* CTA + contact */
-.cta{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.cta h2{font-size:clamp(2.4rem,5.4vw,4.8rem)}
-.cta .photo{aspect-ratio:5/4;border-radius:var(--r)}
-.rows{margin-top:30px;border-top:1px solid var(--rule)}
-.row{display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap}
-.row .l{font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);width:86px}
-.row .v{flex:1;min-width:0;font-size:17px;font-weight:500}
-@media (max-width:860px){.cta{grid-template-columns:1fr}.cta .photo{order:-1}}
+/* Contact: request builder + live dotted map of Europe centred on Kobarid */
+.ct{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);background:var(--surface);border:1px solid var(--rule);border-radius:32px;overflow:hidden}
+.ct .tx{padding:clamp(32px,5vw,64px);display:flex;flex-direction:column}
+.ct h2{font-size:clamp(2.6rem,5.4vw,4.8rem)}
+.ct .lead{color:var(--ink-2);margin-top:18px;max-width:40ch}
+.asks{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.asks button{font:500 14px var(--body);padding:10px 16px;border-radius:999px;border:1px solid var(--rule);background:var(--paper);cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .3s var(--ease)}
+.asks button:hover{border-color:var(--tik);transform:translateY(-2px)}
+.asks button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.ct .send{margin-top:18px;align-self:flex-start}
+.ct .lines{margin-top:auto;padding-top:36px}
+.ct .lines a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--rule);text-decoration:none;font:400 clamp(1.15rem,1.8vw,1.5rem)/1.2 var(--display);letter-spacing:-.01em;transition:color .25s,padding .4s var(--ease)}
+.ct .lines a:last-child{border-bottom:1px solid var(--rule)}
+.ct .lines a .arr{font-size:18px;transition:transform .35s var(--ease)}
+.ct .lines a:hover{color:var(--tik-ink);padding-left:8px}
+.ct .lines a:hover .arr{transform:rotate(-45deg)}
+.ct-map{position:relative;min-height:560px;background:radial-gradient(70% 70% at 55% 55%,color-mix(in srgb,var(--mint) 70%,transparent),transparent 75%),var(--paper);border-left:1px solid var(--rule)}
+.ct-map canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ct-km{position:absolute;left:0;top:0;padding:7px 12px;border-radius:999px;background:var(--ink);color:var(--paper);font:400 15px/1 var(--display);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .3s;will-change:transform}
+.ct-km.on{opacity:1}
+@media (max-width:900px){.ct{grid-template-columns:1fr;border-radius:24px}.ct-map{min-height:380px;border-left:0;border-top:1px solid var(--rule)}}
 
 footer{position:relative;background:var(--forest);color:var(--on-forest);padding-top:88px;margin-top:40px;overflow:hidden;border-radius:32px 32px 0 0}
 footer a{text-decoration:none}
@@ -470,17 +482,26 @@ footer .sl em{font-style:normal;color:var(--glow)}
   </section>
 
   <section id="contact" style="padding-top:40px">
-    <div class="wrap cta">
-      <div class="rv">
-        <h2 class="split">Partner with TIK.</h2>
-        <p style="color:var(--ink-2);margin-top:20px;max-width:40ch">Distributors, hospitals and healthcare professionals: ask for our catalogue, product sheets or a free greencath® sample.</p>
-        <div class="rows">
-          <div class="row"><span class="v" id="em">info@tik.si</span></div>
-          <div class="row"><span class="v" id="ph">+386 (0)5 389 07 00</span></div>
-          <div class="row"><span class="v">Goriška cesta 5B, 5222 Kobarid, Slovenia</span></div>
+    <div class="wrap">
+      <div class="ct rv">
+        <div class="tx">
+          <h2 class="split">Partner with TIK.</h2>
+          <p class="lead">Distributors, hospitals and healthcare professionals: tell us what you need and we will get back to you.</p>
+          <div class="asks" id="asks" role="group" aria-label="What do you need?">
+            <button type="button" aria-pressed="true" data-s="Catalogue request">Our catalogue</button>
+            <button type="button" aria-pressed="false" data-s="Product sheets">Product sheets</button>
+            <button type="button" aria-pressed="false" data-s="Free greencath® sample">A free greencath® sample</button>
+            <button type="button" aria-pressed="false" data-s="Becoming a distributor">Becoming a distributor</button>
+          </div>
+          <a class="btn solid mag send" id="send" href="mailto:info@tik.si?subject=Catalogue%20request">Write to us <span class="arr">→</span></a>
+          <div class="lines">
+            <a href="mailto:info@tik.si">info@tik.si <span class="arr">→</span></a>
+            <a href="tel:+38653890700">+386 (0)5 389 07 00 <span class="arr">→</span></a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Gori%C5%A1ka%20cesta%205B%2C%205222%20Kobarid%2C%20Slovenia" target="_blank" rel="noopener">Goriška cesta 5B, Kobarid <span class="arr">→</span></a>
+          </div>
         </div>
+        <div class="ct-map" id="ctMap" aria-hidden="true"><canvas></canvas><span class="ct-km" id="ctKm"></span></div>
       </div>
-      <div class="photo rv liquid"><img crossorigin="anonymous" src="https://images.unsplash.com/photo-1782399902312-82a4796eb68e?w=1200&q=80&auto=format&fit=crop" alt="Two people on a bench looking out over an alpine valley" loading="lazy"></div>
     </div>
   </section>
 </main>
@@ -1146,6 +1167,83 @@ addEventListener('resize', () => { vyLayout(); vyScroll(); });
 addEventListener('load', () => { vyLayout(); vyScroll(); });
 document.fonts?.ready.then(() => { vyLayout(); vyScroll(); });
 vyLayout();
+
+/* ---------- Contact: request chips build the email subject ---------- */
+$('#asks').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  $$('#asks button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $('#send').href = 'mailto:info@tik.si?subject=' + encodeURIComponent(b.dataset.s);
+});
+
+/* ---------- Contact map: dotted Europe, an arc from Kobarid to the cursor with the distance ---------- */
+(function ctMap(){
+  const box = $('#ctMap'), cv = box.querySelector('canvas'), km = $('#ctKm'), c = cv.getContext('2d');
+  const KOB = [13.58, 46.25];
+  const load = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); });
+  let started = false;
+  const io = new IntersectionObserver(es => { if (es[0].isIntersecting && !started) { started = true; io.disconnect(); init(); } }, {rootMargin:'400px'});
+  io.observe(box);
+  async function init(){
+    let land;
+    try {
+      await load('https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js');
+      await load('https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js');
+      await load('https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js');
+      const topo = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json')).json();
+      land = topojson.feature(topo, topo.objects.land);
+    } catch (e) { console.warn('map', e); return; }
+    let W, H, dpr, proj, dots = [], K = [0,0], tgt = null, cur = null, auto = 0, t0 = 0;
+    const size = () => {
+      W = box.clientWidth; H = box.clientHeight; dpr = Math.min(2, devicePixelRatio||1);
+      cv.width = W*dpr; cv.height = H*dpr;
+      proj = d3.geoAzimuthalEqualArea().rotate([-KOB[0], -KOB[1]]).fitExtent([[0, 0], [W, H]], {type:'MultiPoint', coordinates:[[-4,38],[31,38],[-4,57],[31,57]]});
+      const o = document.createElement('canvas'); o.width = W; o.height = H; const m = o.getContext('2d');
+      m.fillStyle = '#000'; m.beginPath(); d3.geoPath(proj, m)(land); m.fill();
+      const d = m.getImageData(0,0,W,H).data, g = W < 600 ? 8 : 9; dots = [];
+      for (let y = g/2; y < H; y += g) for (let x = g/2; x < W; x += g) if (d[((y|0)*W + (x|0))*4 + 3] > 100) dots.push([x, y]);
+      K = proj(KOB);
+    };
+    size(); new ResizeObserver(size).observe(box);
+    const ink = () => css('--ink'), tik = css('--tik');
+    box.addEventListener('pointermove', e => { const r = box.getBoundingClientRect(); tgt = [e.clientX - r.left, e.clientY - r.top]; auto = -1; });
+    box.addEventListener('pointerleave', () => { auto = 0; });
+    const randomLand = () => dots[(Math.random() * dots.length) | 0];
+    vis.observe(box);
+    loops.add(t => {
+      if (!box._vis) return;
+      if (auto >= 0 && (t - auto > 2.6 || !tgt)) { tgt = randomLand(); auto = t; t0 = t; }
+      if (!tgt) return;
+      cur = cur ? [lerp(cur[0], tgt[0], .12), lerp(cur[1], tgt[1], .12)] : [...tgt];
+      c.setTransform(dpr,0,0,dpr,0,0); c.clearRect(0,0,W,H);
+      // land dots, brighter near the arc's end
+      const col = ink();
+      c.fillStyle = col; c.globalAlpha = .3; c.beginPath();
+      dots.forEach(([x,y]) => { c.moveTo(x+1.6,y); c.arc(x,y,1.6,0,6.283); }); c.fill();
+      c.fillStyle = tik; c.globalAlpha = .9; c.beginPath();
+      dots.forEach(([x,y]) => { const dd = Math.hypot(x-cur[0], y-cur[1]); if (dd < 70) { const r = 1.6 + (1 - dd/70)*1.8; c.moveTo(x+r,y); c.arc(x,y,r,0,6.283); } }); c.fill();
+      c.globalAlpha = 1;
+      // arc from Kobarid
+      const dx = cur[0]-K[0], dy = cur[1]-K[1], L = Math.hypot(dx, dy);
+      const mx = (K[0]+cur[0])/2 - dy*.0 , my = (K[1]+cur[1])/2 - L*.28;
+      c.strokeStyle = tik; c.lineWidth = 2; c.setLineDash([6, 6]); c.lineDashOffset = -t*30;
+      c.beginPath(); c.moveTo(K[0], K[1]); c.quadraticCurveTo(mx, my, cur[0], cur[1]); c.stroke(); c.setLineDash([]);
+      c.fillStyle = tik; c.beginPath(); c.arc(cur[0], cur[1], 5, 0, 6.283); c.fill();
+      // Kobarid: pulsing home dot
+      const ph = (t*.8) % 1;
+      c.strokeStyle = tik; c.globalAlpha = 1 - ph; c.lineWidth = 2; c.beginPath(); c.arc(K[0], K[1], 8 + ph*26, 0, 6.283); c.stroke(); c.globalAlpha = 1;
+      c.fillStyle = tik; c.beginPath(); c.arc(K[0], K[1], 7, 0, 6.283); c.fill();
+      c.fillStyle = '#fff'; c.beginPath(); c.arc(K[0], K[1], 2.6, 0, 6.283); c.fill();
+      c.fillStyle = col; c.font = '400 15px "Cal Sans", system-ui'; c.fillText('Kobarid', K[0] + 14, K[1] + 5);
+      // distance readout
+      const ll = proj.invert(cur);
+      if (ll && L > 14) {
+        km.textContent = Math.round(d3.geoDistance(KOB, ll) * 6371).toLocaleString('en') + ' km from Kobarid';
+        km.style.transform = `translate(${Math.min(W - km.offsetWidth - 10, cur[0] + 12)}px,${cur[1] + 12}px)`;
+        km.classList.add('on');
+      } else km.classList.remove('on');
+    });
+  }
+})();
 
 /* ---------- Scroll: header, progress, parallax, reveals, counters ---------- */
 const prog = $('#prog'), gcimg = $('#gcimg');
