@@ -244,7 +244,7 @@ section{padding-block:110px}
 }
 
 /* Sustainability */
-.sun{display:grid;grid-template-columns:1.2fr 1fr;border-radius:32px;overflow:hidden;background:var(--forest);color:var(--on-forest);margin-inline:max(12px,env(safe-area-inset-left,0px))}
+.sun{display:grid;grid-template-columns:1.2fr 1fr;border-radius:32px;overflow:hidden;background:var(--forest);color:var(--on-forest);width:min(calc(100% - 2*max(20px,env(safe-area-inset-left,0px))),calc(var(--max) - 40px));margin-inline:auto}
 .sun .photo{border-radius:0;min-height:480px;background:var(--forest)}
 .sun .tx{padding:56px;display:flex;flex-direction:column;justify-content:center}
 .sun .eyebrow{color:var(--glow)}
